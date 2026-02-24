@@ -54,6 +54,11 @@ img {
 }
 
 /* ===== Header / Nav ===== */
+/* Offset anchor-link scroll so the sticky header doesn't cover headings */
+section[id] {
+  scroll-margin-top: var(--header-height);
+}
+
 .site-header {
   position: sticky;
   top: 0;
