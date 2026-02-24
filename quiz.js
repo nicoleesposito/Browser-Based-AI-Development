@@ -80,6 +80,7 @@ function showResults() {
   const winner = Object.keys(scores).reduce((a, b) => scores[a] >= scores[b] ? a : b);
   const result = results[winner];
   const container = document.getElementById('quiz-container');
+  if (!container) return;
   container.innerHTML = `
     <div class="quiz-result">
       <p class="quiz-result-eyebrow">Your style is</p>
@@ -98,7 +99,6 @@ function showResults() {
 function renderQuestion(index) {
   const container = document.getElementById('quiz-container');
   if (!container) return;
-  if (index >= quizData.length) return;
 
   const { question, answers } = quizData[index];
 
