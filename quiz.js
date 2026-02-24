@@ -92,8 +92,15 @@ function showResults() {
         <p class="quiz-result-service-desc">${result.serviceDesc}</p>
         <a href="services.html" class="btn btn-primary">See All Services</a>
       </div>
+      <button type="button" class="btn btn-secondary" id="retake-btn">Retake Quiz</button>
     </div>
   `;
+
+  document.getElementById('retake-btn').addEventListener('click', () => {
+    Object.keys(scores).forEach(key => { scores[key] = 0; });
+    currentQuestion = 0;
+    renderQuestion(0);
+  });
 }
 
 function renderQuestion(index) {
