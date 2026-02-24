@@ -77,7 +77,7 @@ const results = {
 };
 
 function showResults() {
-  const winner = Object.keys(scores).reduce((a, b) => scores[a] >= scores[b] ? a : b);
+  const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
   const result = results[winner];
   const container = document.getElementById('quiz-container');
   if (!container) return;
@@ -92,8 +92,15 @@ function showResults() {
         <p class="quiz-result-service-desc">${result.serviceDesc}</p>
         <a href="services.html" class="btn btn-primary">See All Services</a>
       </div>
+      <button type="button" class="btn btn-secondary" id="retake-btn">Retake Quiz</button>
     </div>
   `;
+
+  document.getElementById('retake-btn').addEventListener('click', () => {
+    Object.keys(scores).forEach(key => { scores[key] = 0; });
+    currentQuestion = 0;
+    renderQuestion(0);
+  });
 }
 
 function renderQuestion(index) {
@@ -121,15 +128,18 @@ function renderQuestion(index) {
   });
 
   container.appendChild(answerList);
+}
 
-  answerList.addEventListener('click', (e) => {
+document.addEventListener('DOMContentLoaded', () => {
+  renderQuestion(0);
+
+  document.getElementById('quiz-container').addEventListener('click', (e) => {
     const btn = e.target.closest('.quiz-answer-btn');
     if (!btn) return;
     const style = btn.dataset.style;
     if (style in scores) {
       scores[style]++;
     }
-    console.log(scores);
     currentQuestion++;
     if (currentQuestion >= quizData.length) {
       showResults();
@@ -137,6 +147,4 @@ function renderQuestion(index) {
     }
     renderQuestion(currentQuestion);
   });
-}
-
-document.addEventListener('DOMContentLoaded', () => renderQuestion(0));
+});
