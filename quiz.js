@@ -46,6 +46,9 @@ const quizData = [
   }
 ];
 
+const scores = { classic: 0, bold: 0, natural: 0, healthy: 0 };
+let currentQuestion = 0;
+
 function renderQuestion(index) {
   const container = document.getElementById('quiz-container');
   if (!container) return;
@@ -72,6 +75,22 @@ function renderQuestion(index) {
   });
 
   container.appendChild(answerList);
+
+  answerList.addEventListener('click', (e) => {
+    const btn = e.target.closest('.quiz-answer-btn');
+    if (!btn) return;
+    const style = btn.dataset.style;
+    if (style in scores) {
+      scores[style]++;
+    }
+    console.log(scores);
+    currentQuestion++;
+    if (currentQuestion >= quizData.length) {
+      container.innerHTML = '<p>Quiz complete!</p>';
+      return;
+    }
+    renderQuestion(currentQuestion);
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => renderQuestion(0));
