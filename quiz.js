@@ -54,25 +54,29 @@ const results = {
     label: 'The Classic',
     description: 'You value precision and consistency. Your style is polished, put-together, and always works for you.',
     service: "Women's Haircut & Blowout",
-    serviceDesc: 'Consultation, shampoo, precision cut, and styled finish — from $75'
+    serviceDesc: 'Consultation, shampoo, precision cut, and styled finish — from $75',
+    link: 'services.html#cuts-styling'
   },
   bold: {
     label: 'The Bold',
     description: "You love colour and aren't afraid to turn heads. You're ready for a real transformation.",
     service: 'Single Process Colour',
-    serviceDesc: 'All-over colour application with premium dyes — from $95'
+    serviceDesc: 'All-over colour application with premium dyes — from $95',
+    link: 'services.html#colour'
   },
   natural: {
     label: 'The Natural',
     description: 'Effortless and sun-kissed is your sweet spot. You want dimension that looks like it happened on its own.',
     service: 'Balayage / Ombré',
-    serviceDesc: 'Hand-painted highlights for a natural, sun-kissed effect — from $150'
+    serviceDesc: 'Hand-painted highlights for a natural, sun-kissed effect — from $150',
+    link: 'services.html#colour'
   },
   healthy: {
     label: 'The Nurturer',
     description: 'Your hair health comes first. You want strength, softness, and to undo the damage.',
     service: 'Deep Conditioning Treatment',
-    serviceDesc: 'Intensive moisture and repair for dry or damaged hair — from $40'
+    serviceDesc: 'Intensive moisture and repair for dry or damaged hair — from $40',
+    link: 'services.html#treatments'
   }
 };
 
@@ -90,7 +94,7 @@ function showResults() {
         <p class="quiz-result-service-label">We recommend</p>
         <p class="quiz-result-service-name">${result.service}</p>
         <p class="quiz-result-service-desc">${result.serviceDesc}</p>
-        <a href="services.html" class="btn btn-primary">See All Services</a>
+        <a href="${result.link}" class="btn btn-primary">See All Services</a>
       </div>
       <button type="button" class="btn btn-secondary" id="retake-btn">Retake Quiz</button>
     </div>
