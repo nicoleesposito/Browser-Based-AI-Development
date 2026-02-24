@@ -45,3 +45,33 @@ const quizData = [
     ]
   }
 ];
+
+function renderQuestion(index) {
+  const container = document.getElementById('quiz-container');
+  if (!container) return;
+  if (index >= quizData.length) return;
+
+  const { question, answers } = quizData[index];
+
+  container.innerHTML = '';
+
+  const h2 = document.createElement('h2');
+  h2.textContent = question;
+  container.appendChild(h2);
+
+  const answerList = document.createElement('div');
+  answerList.className = 'quiz-answers';
+
+  answers.forEach(answer => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'quiz-answer-btn';
+    btn.textContent = answer.text;
+    btn.dataset.style = answer.style;
+    answerList.appendChild(btn);
+  });
+
+  container.appendChild(answerList);
+}
+
+document.addEventListener('DOMContentLoaded', () => renderQuestion(0));
