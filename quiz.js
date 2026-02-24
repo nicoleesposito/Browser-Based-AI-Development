@@ -49,6 +49,52 @@ const quizData = [
 const scores = { classic: 0, bold: 0, natural: 0, healthy: 0 };
 let currentQuestion = 0;
 
+const results = {
+  classic: {
+    label: 'The Classic',
+    description: 'You value precision and consistency. Your style is polished, put-together, and always works for you.',
+    service: "Women's Haircut & Blowout",
+    serviceDesc: 'Consultation, shampoo, precision cut, and styled finish — from $75'
+  },
+  bold: {
+    label: 'The Bold',
+    description: "You love colour and aren't afraid to turn heads. You're ready for a real transformation.",
+    service: 'Single Process Colour',
+    serviceDesc: 'All-over colour application with premium dyes — from $95'
+  },
+  natural: {
+    label: 'The Natural',
+    description: 'Effortless and sun-kissed is your sweet spot. You want dimension that looks like it happened on its own.',
+    service: 'Balayage / Ombré',
+    serviceDesc: 'Hand-painted highlights for a natural, sun-kissed effect — from $150'
+  },
+  healthy: {
+    label: 'The Nurturer',
+    description: 'Your hair health comes first. You want strength, softness, and to undo the damage.',
+    service: 'Deep Conditioning Treatment',
+    serviceDesc: 'Intensive moisture and repair for dry or damaged hair — from $40'
+  }
+};
+
+function showResults() {
+  const winner = Object.keys(scores).reduce((a, b) => scores[a] >= scores[b] ? a : b);
+  const result = results[winner];
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = `
+    <div class="quiz-result">
+      <p class="quiz-result-eyebrow">Your style is</p>
+      <h2 class="quiz-result-title">${result.label}</h2>
+      <p class="quiz-result-desc">${result.description}</p>
+      <div class="quiz-result-service">
+        <p class="quiz-result-service-label">We recommend</p>
+        <p class="quiz-result-service-name">${result.service}</p>
+        <p class="quiz-result-service-desc">${result.serviceDesc}</p>
+        <a href="services.html" class="btn btn-primary">See All Services</a>
+      </div>
+    </div>
+  `;
+}
+
 function renderQuestion(index) {
   const container = document.getElementById('quiz-container');
   if (!container) return;
@@ -86,7 +132,7 @@ function renderQuestion(index) {
     console.log(scores);
     currentQuestion++;
     if (currentQuestion >= quizData.length) {
-      container.innerHTML = '<p>Quiz complete!</p>';
+      showResults();
       return;
     }
     renderQuestion(currentQuestion);
