@@ -48,6 +48,9 @@ const quizData = [
 
 function renderQuestion(index) {
   const container = document.getElementById('quiz-container');
+  if (!container) return;
+  if (index >= quizData.length) return;
+
   const { question, answers } = quizData[index];
 
   container.innerHTML = '';
@@ -71,4 +74,4 @@ function renderQuestion(index) {
   container.appendChild(answerList);
 }
 
-renderQuestion(0);
+document.addEventListener('DOMContentLoaded', () => renderQuestion(0));
