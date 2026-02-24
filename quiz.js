@@ -80,9 +80,15 @@ function renderQuestion(index) {
     const btn = e.target.closest('.quiz-answer-btn');
     if (!btn) return;
     const style = btn.dataset.style;
-    scores[style]++;
+    if (style in scores) {
+      scores[style]++;
+    }
     console.log(scores);
     currentQuestion++;
+    if (currentQuestion >= quizData.length) {
+      container.innerHTML = '<p>Quiz complete!</p>';
+      return;
+    }
     renderQuestion(currentQuestion);
   });
 }
